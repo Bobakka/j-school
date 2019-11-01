@@ -46,4 +46,17 @@ class PersonTest {
         assertEquals(Mary.getSpouse(), Philip);
         assertEquals(Philip.getSpouse(), Mary);
     }
+
+    @Test
+    void testDivorce() {
+        Person Mary = new Person(false, "Marry");
+        Person Sam = new Person(true, "Sam");
+
+        assertFalse(Mary.divorce());
+
+        Mary.marry(Sam);
+
+        assertTrue(Mary.divorce());
+
+    }
 }
