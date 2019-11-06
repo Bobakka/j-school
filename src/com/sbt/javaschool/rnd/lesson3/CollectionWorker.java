@@ -26,10 +26,11 @@ public class CollectionWorker {
 * after then read words from lines
 * and add our containers
  */
-            while(scanner.hasNext()) {
+            while(scanner.hasNextLine()) {
                 String lineValue = scanner.nextLine();
                 lines.add(lineValue);
                 Scanner scannerLine = new Scanner(lineValue);
+                scannerLine.useDelimiter("\\W+");
                 while(scannerLine.hasNext()) {
                     String value = scannerLine.next();
                     uniqueWords.add(value.toLowerCase());
@@ -83,7 +84,7 @@ public class CollectionWorker {
 //Task4
     public String reverseText() {
         StringJoiner result = new StringJoiner("\n");
-        ArrayList<String> tmp = lines;
+        ArrayList<String> tmp = new ArrayList<>(lines);
         Collections.reverse(tmp);
 
         for (String line : tmp) {
@@ -100,4 +101,11 @@ public class CollectionWorker {
         return lines.get(iLine);
     }
 
+    public String getLine(List<Integer> numLines) throws ArrayIndexOutOfBoundsException {
+        StringJoiner result = new StringJoiner("\n");
+        for (Integer iLine : numLines) {
+            result.add(getLine(iLine));
+        }
+        return result.toString();
+    }
 }
