@@ -16,7 +16,8 @@ public class MainClass {
             stream = new FileInputStream(args[0]);
         }
         else {
-            stream = myClass.getClass().getResourceAsStream("example.txt");
+            stream = myClass.getClass()
+                    .getClassLoader().getResourceAsStream("example.txt");
         }
 
         if (stream == null)

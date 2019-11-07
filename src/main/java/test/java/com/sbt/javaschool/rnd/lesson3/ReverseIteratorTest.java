@@ -1,5 +1,6 @@
-package com.sbt.javaschool.rnd.lesson3;
+package test.java.com.sbt.javaschool.rnd.lesson3;
 
+import com.sbt.javaschool.rnd.lesson3.ReverseIterator;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

@@ -1,5 +1,6 @@
-package com.sbt.javaschool.rnd.lesson2;
+package test.java.com.sbt.javaschool.rnd.lesson2;
 
+import com.sbt.javaschool.rnd.lesson2.Person;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

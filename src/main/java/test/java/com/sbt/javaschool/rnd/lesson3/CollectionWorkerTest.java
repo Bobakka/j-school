@@ -1,5 +1,6 @@
-package com.sbt.javaschool.rnd.lesson3;
+package test.java.com.sbt.javaschool.rnd.lesson3;
 
+import com.sbt.javaschool.rnd.lesson3.CollectionWorker;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
