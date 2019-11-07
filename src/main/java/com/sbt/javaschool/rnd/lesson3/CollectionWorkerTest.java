@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -25,7 +25,7 @@ class CollectionWorkerTest {
 
         inputString = "a aaaa aa aaa qwerrtt\ndfdffda sda aaaa dfdf";
         w = new CollectionWorker(
-                new ByteArrayInputStream(inputString.getBytes(Charset.forName("UTF-8")))
+                new ByteArrayInputStream(inputString.getBytes(StandardCharsets.UTF_8))
         );
     }
 
