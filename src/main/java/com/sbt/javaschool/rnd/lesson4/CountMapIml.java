@@ -2,29 +2,31 @@ package com.sbt.javaschool.rnd.lesson4;
 
 import java.util.*;
 
-public class CountMapIml<T> implements CountMap {
+public class CountMapIml<T> implements CountMap<T> {
 
     private Map<T, Integer> counter = new HashMap<>();
-    public void add(Object o) {
-        counter.computeIfPresent((T)o, (key, value)->++value);
-        counter.computeIfAbsent((T)o, key->1);
+    public void add(T o) {
+        counter.computeIfPresent(o, (key, value)->++value);
+        counter.computeIfAbsent(o, key->1);
+        super.toString();
     }
 
     public int getCount(Object o) {
         return counter.getOrDefault(o, 0);
     }
 
-    public void addAll(CountMap source) {
+    public void addAll(CountMap<T> source) {
         source.toMap().forEach((k, v)->
-                counter.merge((T)k, (Integer)v, Integer::sum));
+                counter.merge(k, v, Integer::sum));
 
     }
 
-    public Map toMap() {
+    public Map<T, Integer> toMap() {
         return counter;
     }
 
-    public void toMap(Map destination) {
+    public void toMap(Map<? super T, Integer> destination) {
+//        destination = counter;
         counter.forEach((k, v)->destination.put(k,v));
     }
 
@@ -32,7 +34,7 @@ public class CountMapIml<T> implements CountMap {
         return counter.size();
     }
 
-    public int remove(Object o) {
+    public int remove(T o) {
         return counter.remove(o);
     }
 }
