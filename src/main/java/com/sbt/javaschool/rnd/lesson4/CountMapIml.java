@@ -7,8 +7,7 @@ public class CountMapIml<T> implements CountMap<T> {
     private Map<T, Integer> counter = new HashMap<>();
     public void add(T o) {
         counter.computeIfPresent(o, (key, value)->++value);
-        counter.computeIfAbsent(o, key->1);
-        super.toString();
+        counter.putIfAbsent(o, 1);
     }
 
     public int getCount(Object o) {
@@ -27,7 +26,7 @@ public class CountMapIml<T> implements CountMap<T> {
 
     public void toMap(Map<? super T, Integer> destination) {
 //        destination = counter;
-        counter.forEach((k, v)->destination.put(k,v));
+        counter.forEach(destination::put);
     }
 
     public int size() {
