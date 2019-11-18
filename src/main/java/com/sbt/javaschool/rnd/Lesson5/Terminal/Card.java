@@ -53,4 +53,8 @@ public class Card {
             pinHash = null;
         }
     }
+
+    public Integer getId() {
+        return this.id;
+    }
 }
