@@ -28,6 +28,20 @@ public class MyStompSessionHandler extends StompSessionHandlerAdapter {
     @Override
     public void handleFrame(StompHeaders headers, Object payload) {
         Message msg = (Message) payload;
+        if (!msg.getErrorString().isEmpty()) {
+            System.out.println(msg.getErrorString());
+            return;
+        }
+
+        switch (msg.getCommand()) {
+            case getBalance:
+                System.out.println(String.format("Your balance is %d", msg.getMoney()) );
+                break;
+            case getMoney:
+                System.out.println("Please, take money");
+            case putMoney:
+                System.out.println(String.format("You add %d money", msg.getMoney()));
+        }
     }
 
 }

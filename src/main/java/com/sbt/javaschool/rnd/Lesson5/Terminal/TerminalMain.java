@@ -7,6 +7,13 @@ public class TerminalMain {
     public static void main(String[] args) {
         Terminal t = new TerminalImpl();
 
+        t.connect("ws://localhost:9090/app");
+
+        t.putCard(new Card("Ivan", "Ivanov", 1234));
+
+        if (t.checkPin(5432)) {
+            t.balance();
+        }
 
     }
 }

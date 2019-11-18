@@ -12,6 +12,7 @@ import org.springframework.web.socket.sockjs.client.SockJsClient;
 import org.springframework.web.socket.sockjs.client.Transport;
 import org.springframework.web.socket.sockjs.client.WebSocketTransport;
 
+import javax.management.timer.Timer;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -24,8 +25,9 @@ public class TerminalImpl implements Terminal {
     private StompSessionHandler sessionHandler;
     private StompSession stompSession;
     private Card card;
+    private Timer time = new Timer();
 
-    private void connect(String url) {
+    public void connect(String url) {
         try {
             stompSession = stompClient.connect(url, sessionHandler).get();
         }
@@ -46,12 +48,16 @@ public class TerminalImpl implements Terminal {
         sessionHandler = new MyStompSessionHandler();
     }
     @Override
-    public void putCard(Card card) {
-        this.card = card;
+    public void putCard(Card card) throws NullPointerException, IllegalArgumentException {
+            this.card = card;
     }
 
     @Override
-    public boolean checkPin(Integer pin) {
+    public boolean checkPin(Integer pin) throws NullPointerException {
+        if (pin == null) {
+            throw new NullPointerException();
+        }
+
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
             md.update(pin.byteValue());
@@ -85,9 +91,13 @@ public class TerminalImpl implements Terminal {
         stompSession.send("/terminal/messages", msg);
     }
 
-    private class NotEnoughMoney extends Exception {
-    }
-    private class UnableAccount extends Exception {
-    }
+    @Override
+    public void balance() {
+        Message msg = new Message();
+        msg.setFrom(card.getId());
+        msg.setDirection(Message.Direction.terminal);
+        msg.setCommand(Message.Cmd.getBalance);
 
+        stompSession.send("/terminal/messages", msg);
+    }
 }
