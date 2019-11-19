@@ -4,8 +4,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class BeanUtils {
     /**
@@ -26,12 +26,43 @@ public class BeanUtils {
      * */
 
     public static void assign(@NotNull Object to, @NotNull Object from) {
-        Map<Class, Method> fromMethods = new HashMap<>();
-        Map<Class, Method> toMethods = new HashMap<>();
+        Map<String, Method> fromMethods;
+        Map<String, Method> toMethods;
 
+       fromMethods = Arrays.stream(from.getClass().getMethods())
+               .parallel()
+               .filter(x->x.getName().startsWith("get"))
+               .collect(Collectors.toMap(k->k.getName().substring(3), v->v));
+
+
+        Map<String, Method> finalFromMethods = fromMethods;
+        toMethods = Arrays.stream(from.getClass().getMethods())
+                .parallel()
+                .filter(x->x.getName().startsWith("set"))
+                .filter(x->finalFromMethods
+                        .containsKey(x.getName().substring(3)))
+                .collect(Collectors.toMap(k->k.getName().substring(3), v->v));
+
+        Map<String, Method> finalToMethods = toMethods;
+        fromMethods.forEach((k, v) -> {
+            Method m = finalToMethods.get(k);
+            if (m != null){
+                try {
+                    if (m.getParameterTypes()[0].equals(v.getReturnType()) |
+                            m.getParameterTypes()[0].equals(v.getReturnType().getSuperclass()))
+                    finalToMethods.get(k).invoke(to, v.invoke(from));
+                } catch (InvocationTargetException | IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+/*
         for (Method m : from.getClass().getMethods()) {
             if (m.getName().startsWith("get")) {
-                fromMethods.put(m.getReturnType().getClass(), m);
+                fromMethods.put(m, m.getReturnType().getClass());
+                getterSetter.put(m.getName(),
+                        "set" +m.getName().substring(3,m.getName().length()));
             }
         }
 
@@ -51,6 +82,9 @@ public class BeanUtils {
                 }
             }
         });
+
+
+ */
     }
 
 }
