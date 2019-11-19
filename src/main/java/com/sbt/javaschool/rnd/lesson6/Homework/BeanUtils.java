@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -31,60 +32,36 @@ public class BeanUtils {
 
        fromMethods = Arrays.stream(from.getClass().getMethods())
                .parallel()
+               .filter(x-> Modifier.isPublic(x.getModifiers()))
                .filter(x->x.getName().startsWith("get"))
                .collect(Collectors.toMap(k->k.getName().substring(3), v->v));
 
-
+//why need next line for lambda???
         Map<String, Method> finalFromMethods = fromMethods;
-        toMethods = Arrays.stream(from.getClass().getMethods())
+        toMethods = Arrays.stream(to.getClass().getMethods())
                 .parallel()
+                .filter(x-> Modifier.isPublic(x.getModifiers()))
                 .filter(x->x.getName().startsWith("set"))
                 .filter(x->finalFromMethods
                         .containsKey(x.getName().substring(3)))
                 .collect(Collectors.toMap(k->k.getName().substring(3), v->v));
 
-        Map<String, Method> finalToMethods = toMethods;
-        fromMethods.forEach((k, v) -> {
-            Method m = finalToMethods.get(k);
-            if (m != null){
-                try {
-                    if (m.getParameterTypes()[0].equals(v.getReturnType()) |
-                            m.getParameterTypes()[0].equals(v.getReturnType().getSuperclass()))
-                    finalToMethods.get(k).invoke(to, v.invoke(from));
-                } catch (InvocationTargetException | IllegalAccessException e) {
-                    e.printStackTrace();
-                }
+        for (String k : fromMethods.keySet()) {
+            if (!toMethods.containsKey(k) && !fromMethods.containsKey(k)) {
+                continue;
             }
-        });
+            Method m = toMethods.get(k);
+            if (m == null)
+                continue;
+            try {
+                if (m.getParameterTypes()[0].equals(fromMethods.get(k).getReturnType()) |
+                        m.getParameterTypes()[0].equals(fromMethods.get(k).getReturnType().getSuperclass()))
+                    toMethods.get(k).invoke(to, fromMethods.get(k).invoke(from));
+            } catch (InvocationTargetException | IllegalAccessException e) {
+                e.printStackTrace();
+            }
 
-/*
-        for (Method m : from.getClass().getMethods()) {
-            if (m.getName().startsWith("get")) {
-                fromMethods.put(m, m.getReturnType().getClass());
-                getterSetter.put(m.getName(),
-                        "set" +m.getName().substring(3,m.getName().length()));
-            }
         }
-
-        for (Method m : to.getClass().getMethods()) {
-            if (m.getName().startsWith("set")) {
-                toMethods.put(m.getParameterTypes()[0].getClass(), m);
-            }
-        }
-
-        fromMethods.forEach((k, v) -> {
-            if (toMethods.containsKey(k) |
-                toMethods.containsKey(k.getSuperclass())) {
-                try {
-                    toMethods.get(k).invoke(to, v.invoke(from));
-                } catch (InvocationTargetException | IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-
- */
     }
 
 }
