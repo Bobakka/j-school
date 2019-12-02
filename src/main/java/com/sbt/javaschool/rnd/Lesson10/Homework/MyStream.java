@@ -7,13 +7,14 @@ import java.util.function.*;
 public class MyStream<T> {
     private Collection<T> collection;
     private List<Object> conveyer;
+    private MyStream prev;
 
     public MyStream() {
         this.conveyer = new ArrayList<>();
     }
 
     public MyStream(Collection<T> in) {
-        this.collection = in;
+        this.collection = new ArrayList<>(in);
         this.conveyer = new ArrayList<>();
     }
 
@@ -34,6 +35,7 @@ public class MyStream<T> {
     public <R> MyStream<R> transform(Function<? super T, ? extends R> mapper) {
         conveyer.add(mapper);
         MyStream<R> s = new MyStream(this.collection, this.conveyer);
+        s.prev = this;
         return s;
     }
 //terminal
@@ -49,7 +51,7 @@ public class MyStream<T> {
 
     private void terminate() {
         for (Object o : conveyer) {
-            switch (Lambdas.fromClass(o.getClass())) {
+            switch (Lambdas.fromClass(o.getClass().getInterfaces()[0])) {
                 case ClassPredicate:
                     predicate(o);
                     break;
@@ -64,19 +66,14 @@ public class MyStream<T> {
 
     private void predicate(Object o) {
 
-        for (Iterator<?> it = collection.iterator(); it.hasNext(); ) {
-            if (((Predicate)o).test(it.next())) {
-                it.remove();
-            }
-        }
+        collection.removeIf(((Predicate) o));
     }
     private <R> void function(Object o) {
-            List<R> tmp = new ArrayList<>();
-        for (Iterator<?> it = collection.iterator(); it.hasNext(); ) {
-            tmp.add((R) ((Function)o).apply(it));
+            List<T> tmp = new ArrayList<>();
+        for (R value : (Iterable<R>) prev.collection) {
+            tmp.add((T) ((Function) o).apply(value));
         }
-//TODO
- //       this.collection = tmp;
+        this.collection = tmp;
     }
 
     private enum Lambdas {
@@ -101,4 +98,6 @@ public class MyStream<T> {
             return ClassUnknown;
         }
     }
+
+
 }
