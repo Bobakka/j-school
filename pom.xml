@@ -10,6 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>Lesson8.Stasbook</module>
+        <module>Lesson11MultiThreading</module>
     </modules>
 
     <dependencies>
