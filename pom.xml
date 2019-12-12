@@ -11,6 +11,7 @@
     <modules>
         <module>Lesson8.Stasbook</module>
         <module>Lesson11MultiThreading</module>
+        <module>Lesson12.Multithreading2</module>
     </modules>
 
     <dependencies>

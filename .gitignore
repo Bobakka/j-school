@@ -4,3 +4,4 @@
 *.iml
 /Lesson11MultiThreading/target/
 .idea/
+*/target/
