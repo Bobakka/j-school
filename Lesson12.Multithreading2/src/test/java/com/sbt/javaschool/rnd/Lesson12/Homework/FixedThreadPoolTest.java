@@ -1,13 +1,13 @@
 package com.sbt.javaschool.rnd.Lesson12.Homework;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 class FixedThreadPoolTest {
 /*
@@ -21,7 +21,7 @@ class FixedThreadPoolTest {
     void execute(int nThreads) {
         ThreadPool threadPool = new FixedThreadPool(nThreads);
         List<Runnable> list = new ArrayList<>();
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 100000; i++) {
             System.out.println("add new task. Task # " + i);
             threadPool.execute(new FactorialCalculate());
         }
@@ -31,6 +31,18 @@ class FixedThreadPoolTest {
         }
         System.out.println("Thread pool info: " + threadPool.numberThreads());
         threadPool.shutdown();
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {2, 4, 8})
+    void useStandardExecutor(int nThreads) throws InterruptedException {
+        ExecutorService executor = Executors.newFixedThreadPool(nThreads);
+
+        for (int i = 0; i < 100000; i++) {
+            executor.execute(new FactorialCalculate());
+        }
+
+        executor.awaitTermination(10, TimeUnit.MINUTES);
     }
 
 }

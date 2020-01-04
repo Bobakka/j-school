@@ -9,9 +9,19 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>Lesson8.Stasbook</module>
-        <module>Lesson11MultiThreading</module>
+        <module>Lesson01.HelloWorld</module>
+        <module>Lesson02.Classes</module>
+        <module>Lesson03.Collections</module>
+        <module>Lesson04.Generics</module>
+        <module>Lesson05.Exceptions</module>
+        <module>Lesson06.Reflection</module>
+        <module>Lesson07.ClassLoaders</module>
+        <module>Lesson08.Stasbook</module>
+        <module>Lesson09.Serialization</module>
+        <module>Lesson10.LambdaStreamAPI</module>
+        <module>Lesson11.MultiThreading</module>
         <module>Lesson12.Multithreading2</module>
+        <module>Lesson13.JMM</module>
     </modules>
 
     <dependencies>
@@ -30,11 +40,6 @@
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-params</artifactId>
             <version>5.5.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-websocket</artifactId>
-            <version>2.1.8.RELEASE</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
         <dependency>
