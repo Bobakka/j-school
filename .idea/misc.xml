@@ -9,6 +9,7 @@
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/Lesson11MultiThreading/pom.xml" />
+        <option value="$PROJECT_DIR$/Lesson12.Multithreading2/pom.xml" />
         <option value="$PROJECT_DIR$/Lesson5/pom.xml" />
         <option value="$PROJECT_DIR$/Lesson8.Stasbook/pom.xml" />
         <option value="$PROJECT_DIR$/pom.xml" />

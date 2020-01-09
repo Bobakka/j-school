@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>Lesson12.Multithreading2</artifactId>
+    <artifactId>Lesson12.MultithreadingPart2</artifactId>
 
 
 </project>

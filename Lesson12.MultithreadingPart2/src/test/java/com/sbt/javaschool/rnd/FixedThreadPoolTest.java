@@ -1,4 +1,4 @@
-package com.sbt.javaschool.rnd.Lesson12.Homework;
+package com.sbt.javaschool.rnd;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;

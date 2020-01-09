@@ -1,12 +1,9 @@
-package com.sbt.javaschool.rnd.Lesson12.Homework;
+package com.sbt.javaschool.rnd;
 
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ScalableThreadPoolTest {
 /*
@@ -16,7 +13,7 @@ class ScalableThreadPoolTest {
  * So long
  */
     @Test
-    void execute() throws InterruptedException {
+    void execute() {
         ThreadPool threadPool = new ScalableThreadPool(2, 8);
         List<Runnable> list = new ArrayList<>();
         for (int i = 0; i < 1000; i++) {

@@ -1,15 +1,6 @@
 package com.sbt.javaschool.rnd;
 
-import com.sbt.javaschool.rnd.Lesson12.Homework.FactorialCalculate;
 import org.junit.jupiter.api.RepeatedTest;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.parallel.Execution;
-
-import java.sql.Time;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ExecutionManagerTest {
 

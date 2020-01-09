@@ -1,10 +1,10 @@
-package com.sbt.javaschool.rnd.Lesson12.Homework;
+package com.sbt.javaschool.rnd;
 
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.security.RunAs;
-import java.io.FileReader;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.TimeUnit;
 

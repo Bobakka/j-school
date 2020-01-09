@@ -20,8 +20,9 @@
         <module>Lesson09.Serialization</module>
         <module>Lesson10.LambdaStreamAPI</module>
         <module>Lesson11.MultiThreading</module>
-        <module>Lesson12.Multithreading2</module>
+        <module>Lesson12.MultithreadingPart2</module>
         <module>Lesson13.JMM</module>
+        <module>Lesson12.MultithreadingPart2</module>
     </modules>
 
     <dependencies>

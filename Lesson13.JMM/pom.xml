@@ -11,5 +11,12 @@
 
     <artifactId>Lesson13JMM</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.sbt.javaschool.rnd</groupId>
+            <artifactId>Lesson12.MultithreadingPart2</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 </project>

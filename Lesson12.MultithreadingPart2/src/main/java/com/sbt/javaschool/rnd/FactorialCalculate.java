@@ -1,8 +1,8 @@
-package com.sbt.javaschool.rnd.Lesson12.Homework;
+package com.sbt.javaschool.rnd;
 
 public class FactorialCalculate implements Runnable {
     void factorial(int n) {
-        int res[] = new int[500];
+        int[] res = new int[500];
 
         // Initialize result
         res[0] = 1;
@@ -25,7 +25,7 @@ public class FactorialCalculate implements Runnable {
     // This function uses simple school mathematics for
     // multiplication. This function may value of res_size
     // and returns the new value of res_size
-    int multiply(int x, int res[], int res_size) {
+    int multiply(int x, int[] res, int res_size) {
         int carry = 0; // Initialize carry
 
         // One by one multiply n with individual

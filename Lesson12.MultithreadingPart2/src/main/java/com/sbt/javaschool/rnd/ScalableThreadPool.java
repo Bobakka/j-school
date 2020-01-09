@@ -1,4 +1,4 @@
-package com.sbt.javaschool.rnd.Lesson12.Homework;
+package com.sbt.javaschool.rnd;
 
 import org.jetbrains.annotations.NotNull;
 
