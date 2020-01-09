@@ -1,5 +1,6 @@
-package com.sbt.javaschool.rnd;
+package com.sbt.javaschool.rnd.task1;
 
+import com.sbt.javaschool.rnd.task1.Task;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

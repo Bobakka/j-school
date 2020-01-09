@@ -22,7 +22,6 @@
         <module>Lesson11.MultiThreading</module>
         <module>Lesson12.MultithreadingPart2</module>
         <module>Lesson13.JMM</module>
-        <module>Lesson12.MultithreadingPart2</module>
     </modules>
 
     <dependencies>

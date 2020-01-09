@@ -10,6 +10,6 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>Lesson10.LambdaStreamAPI</artifactId>
-
+    <packaging>jar</packaging>
 
 </project>

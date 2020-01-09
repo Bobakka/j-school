@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>Lesson3.Collections</artifactId>
-
+    <artifactId>Lesson03.Collections</artifactId>
+    <packaging>jar</packaging>
 
 </project>

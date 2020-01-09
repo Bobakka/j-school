@@ -9,7 +9,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>Lesson5.Exceptions</artifactId>
+    <artifactId>Lesson05.Exceptions</artifactId>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>

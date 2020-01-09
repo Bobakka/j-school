@@ -1,4 +1,4 @@
-package com.sbt.javaschool.rnd;
+package com.sbt.javaschool.rnd.task1;
 
 public class CallableError extends RuntimeException {
     private Exception ex;

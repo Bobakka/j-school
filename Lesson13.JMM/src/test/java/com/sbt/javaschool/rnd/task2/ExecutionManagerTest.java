@@ -1,5 +1,6 @@
-package com.sbt.javaschool.rnd;
+package com.sbt.javaschool.rnd.task2;
 
+import com.sbt.javaschool.rnd.FactorialCalculate;
 import org.junit.jupiter.api.RepeatedTest;
 
 class ExecutionManagerTest {
