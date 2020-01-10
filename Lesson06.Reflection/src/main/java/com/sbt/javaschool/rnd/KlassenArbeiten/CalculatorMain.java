@@ -1,13 +1,9 @@
 package com.sbt.javaschool.rnd.KlassenArbeiten;
 
-import java.lang.reflect.Proxy;
-
 public class CalculatorMain {
     public static void main(String[] args) {
-        Calculator calc =
-                (Calculator) Proxy.newProxyInstance(CalculatorImpl.class.getClassLoader(),
-                        new Class[]{Calculator.class},
-                        new CacheProxy());
+        CacheProxy proxy = new CacheProxySimple();
+        Calculator calc = proxy.cache(new CalculatorImpl());
 
         System.out.println(calc.calc(3));
         System.out.println(calc.calc(5));
