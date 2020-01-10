@@ -1,56 +1,44 @@
 package com.sbt.javaschool.rnd;
 
 import com.sbt.javaschool.rnd.SerializeAnnotations.CacheType;
+import com.sbt.javaschool.rnd.SerializeAnnotations.SerializeMethodCache;
 
 import java.io.Serializable;
-import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class CacheProxySettings implements Serializable {
 
-    Map<Method, MethodSettings> settings = new HashMap<>();
+    private final int maxLengthList;
+    private final Class[] identityBy;
+    private final CacheType type;
+    private final String fileNamePrefix;
+    private final boolean zip;
 
-    CacheProxySettings() {}
-
-    boolean containsMethod(Method method) {
-        return settings.containsKey(method);
+    CacheProxySettings(SerializeMethodCache annotation) {
+        this.maxLengthList = annotation.lengthList();
+        this.identityBy = annotation.identityBy();
+        this.type = annotation.cacheType();
+        this.fileNamePrefix = annotation.fileNamePrefix();
+        this.zip = annotation.zip();
     }
 
-    MethodSettings annotations(Method method) {
-        return settings.get(method);
+    public int getMaxLengthList() {
+        return maxLengthList;
     }
 
-    void setMethodSettings(Method method
-                       , Integer maxLengthList
-                       , Class[] identityBy
-                       , CacheType type
-                       , String fileNamePrefix
-                       , boolean zip) {
-        settings.put(method, new MethodSettings(
-                maxLengthList, identityBy, type, fileNamePrefix, zip));
+    public Class[] getIdentityBy() {
+        return identityBy;
     }
 
-    private class MethodSettings implements Serializable {
-        private Integer maxLengthList;
-        private Class[] identityBy;
-        private CacheType type;
-        private String fileNamePrefix;
-        private boolean zip;
+    public CacheType getType() {
+        return type;
+    }
 
-        private MethodSettings() {
+    public String getFileNamePrefix() {
+        return fileNamePrefix;
+    }
 
-        }
-
-        private MethodSettings(Integer maxLengthList, Class[] identityBy, CacheType type, String fileNamePrefix, boolean zip) {
-            this.maxLengthList = maxLengthList;
-            this.identityBy = identityBy;
-            this.type = type;
-            this.fileNamePrefix = fileNamePrefix;
-            this.zip = zip;
-        }
-
-
+    public boolean isZip() {
+        return zip;
     }
 }
